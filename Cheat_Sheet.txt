@@ -1,0 +1,46 @@
+
+
+
+
+ssh  your_user_name@itiger.memphis.edu
+git clone git@github.com:CUCHon/DM.git    /project/Your_user_name          
+cd /project/your_user_name/DM
+#go to your own folder under /project 
+
+
+In case you do not have git on itiger
+scp -r ~/DM  your_user_name@itiger.memphis.edu:/project/Your_user_name  
+cd /project/your_user_name/DM
+
+
+python3 -m venv jupyter
+#This command creates your virtual python environment jupyter (name it as you want)
+
+source jupyter/bin/activate
+#This command activate the created virtual python environment jupyter
+
+pip install jupyter transformers[torch] datasets  torch
+# Now let's install the necessuary python libraries
+
+
+
+sbatch jupyter.sh
+#WARNING: before you modified this script before submission
+
+
+
+ssh -N -L PORT:NODE:PORT your_user_name@itiger.memphis.edu
+# Let's connect your laptop with the computing node
+ 
+
+
+http://localhost:PORT
+# open in your browser
+
+
+
+
+
+
+
+
