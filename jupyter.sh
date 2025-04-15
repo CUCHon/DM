@@ -8,7 +8,6 @@
 #SBATCH --nodelist=itiger06
 #SBATCH --job-name=jupyter
 
-source jupyter/bin/activate
 
 PORT=8888
 
