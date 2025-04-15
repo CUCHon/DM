@@ -1,41 +1,52 @@
 
 
 
+#step1: connect to itiger cluster and go to your own folder under /project 
+ssh  your_user_name@itiger.memphis.edu  
+cd /project/your_user_name
+mkdir DM
+cd DM
 
-ssh  your_user_name@itiger.memphis.edu
-git clone git@github.com:CUCHon/DM.git    /project/Your_user_name          
-cd /project/your_user_name/DM
-#go to your own folder under /project 
+#step2 upload your files to the folder.
+ #option 1, git clone git@github.com:CUCHon/DM.git
+ # need to set up for github and RSA public keys
+ #option 2, use VsCode/MobaxTerm/etc to upload files
+ #option 3, scp -r /your_local_file  your_user_name@itiger.memphis.edu:/project/Your_user_name  
 
 
-In case you do not have git on itiger
-scp -r ~/DM  your_user_name@itiger.memphis.edu:/project/Your_user_name  
-cd /project/your_user_name/DM
-
-
-python3 -m venv jupyter
-#This command creates your virtual python environment jupyter (name it as you want)
-
-source jupyter/bin/activate
-#This command activate the created virtual python environment jupyter
-
+#step3 create/install a virtual python environment
+conda activate base
 pip install jupyter transformers[torch] datasets  torch
-# Now let's install the necessuary python libraries
 
-
-
+#step4 submit your job to itiger
 sbatch jupyter.sh
-#WARNING: before you modified this script before submission
+#WARNING:  MUST modified this script before submission, include PORT and nodelist
 
 
 
-ssh -N -L PORT:NODE:PORT your_user_name@itiger.memphis.edu
-# Let's connect your laptop with the computing node
- 
+
+#step5, connect your laptop with the computing node
+#Note: open a new terminal and run the command
+#replace the PORT and Node to what you used in jupyter.sh
+ssh -N -L PORT:NODE:PORT your_user_name@itiger.memphis.edu 
 
 
+#step6, open this URL in your browser
+#replace the PORT to what you used in jupyter.sh
 http://localhost:PORT
-# open in your browser
+
+#step7 
+RUN squeue to find your job number xxxx
+find the slurm-xxxx.out file in your folder
+you can see this line 
+[I 2025-04-15 12:23:59.026 ServerApp] http://itiger06:8888/tree?token=9aaf21b286fa8fb82b03891745a995d53e9976baee45c59a
+So the "9aaf21b286fa8fb82b03891745a995d53e9976baee45c59a" is your token to access your started jupyter
+
+
+#step8
+Run the BERT.ipynb and fine-tune.ipynb
+
+
 
 
 
